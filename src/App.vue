@@ -1,6 +1,11 @@
 <template>
   <div id="app">
     <div id="nav">
+      <b-icon
+          pack="fas"
+          icon="parking"
+          size="is-small">
+      </b-icon>
       <router-link to="/">Home</router-link> |
       <router-link to="/about">About</router-link>
     </div>
