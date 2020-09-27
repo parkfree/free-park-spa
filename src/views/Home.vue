@@ -1,18 +1,21 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div class="tile">
+    {{user.owner}}
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
-
 export default {
   name: 'Home',
-  components: {
-    HelloWorld
+  data () {
+    return {
+      user: {}
+    }
+  },
+  beforeMount: function () {
+    this.$http.get('http://localhost:8080/tenant').then((response) => {
+      this.user = response.data
+    })
   }
 }
 </script>

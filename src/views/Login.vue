@@ -6,7 +6,7 @@
           <div class="box">
             <h4 class="title is-4 is-spaced">登录 Free Park</h4>
             <p class="subtitle is-6 has-text-grey">忘记密码请联系管理员更改</p>
-            <form>
+            <form @submit.prevent="login">
               <b-field>
                 <b-input v-model="email" placeholder="邮箱" type="email" icon="envelope"></b-input>
               </b-field>
@@ -39,6 +39,15 @@ export default {
     return {
       email: '',
       password: ''
+    }
+  },
+  methods: {
+    login: function () {
+      this.$store.dispatch('login', {
+        email: this.email,
+        password: this.password
+      }).then(() => this.$router.push('/'))
+        .catch(err => console.log(err))
     }
   }
 }

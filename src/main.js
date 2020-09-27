@@ -4,6 +4,7 @@ import router from './router'
 import store from './store'
 import Buefy from 'buefy'
 import 'buefy/dist/buefy.css'
+import Axios from 'axios'
 
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { library } from '@fortawesome/fontawesome-svg-core'
@@ -24,6 +25,12 @@ Vue.use(Buefy, {
   defaultIconComponent: 'font-awesome-icon',
   defaultIconPack: 'fas'
 })
+
+Vue.prototype.$http = Axios
+const token = localStorage.getItem('token')
+if (token) {
+  Vue.prototype.$http.defaults.headers.common['Authorization'] = 'Bearer ' + token
+}
 
 Vue.config.productionTip = false
 
