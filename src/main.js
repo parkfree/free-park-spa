@@ -5,11 +5,18 @@ import store from './store'
 import Buefy from 'buefy'
 import 'buefy/dist/buefy.css'
 
-import { library } from '@fortawesome/fontawesome-svg-core'
-import { faParking, faEnvelope, faKey, faEye } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+import { library } from '@fortawesome/fontawesome-svg-core'
 
-library.add(faParking, faEnvelope, faKey, faEye)
+import {
+  faParking, faEnvelope, faKey, faCheck, faCheckCircle, faInfoCircle, faExclamationTriangle, faExclamationCircle,
+  faArrowUp, faAngleRight, faAngleLeft, faAngleDown,
+  faEye, faEyeSlash, faCaretDown, faCaretUp, faUpload
+} from '@fortawesome/free-solid-svg-icons'
+
+library.add(faParking, faEnvelope, faKey, faCheck, faCheckCircle, faInfoCircle, faExclamationTriangle, faExclamationCircle,
+  faArrowUp, faAngleRight, faAngleLeft, faAngleDown,
+  faEye, faEyeSlash, faCaretDown, faCaretUp, faUpload)
 
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 
