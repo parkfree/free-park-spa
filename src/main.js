@@ -6,10 +6,10 @@ import Buefy from 'buefy'
 import 'buefy/dist/buefy.css'
 
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faParking } from '@fortawesome/free-solid-svg-icons'
+import { faParking, faEnvelope, faKey, faEye } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
-library.add(faParking)
+library.add(faParking, faEnvelope, faKey, faEye)
 
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 
