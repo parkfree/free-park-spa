@@ -13,7 +13,7 @@ export default {
     }
   },
   beforeMount: function () {
-    this.$http.get('http://localhost:8080/tenant').then((response) => {
+    this.$http.get('/tenant').then((response) => {
       this.user = response.data
     })
   }
