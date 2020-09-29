@@ -11,11 +11,11 @@
             </b-notification>
             <form @submit.prevent="login">
               <b-field>
-                <b-input v-model="email" placeholder="邮箱" type="email" icon="envelope"></b-input>
+                <b-input required v-model="email" placeholder="邮箱" type="email" icon="envelope"></b-input>
               </b-field>
 
               <b-field>
-                <b-input v-model="password" placeholder="密码" type="password" icon="key" password-reveal></b-input>
+                <b-input required v-model="password" placeholder="密码" type="password" icon="key" password-reveal></b-input>
               </b-field>
 
               <div class="level">
