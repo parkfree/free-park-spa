@@ -32,6 +32,21 @@ export default new Vuex.Store({
           })
       })
     },
+    register ({ commit }, data) {
+      return new Promise((resolve, reject) => {
+        client.post('/signup', data)
+          .then(resp => {
+            const token = resp.data.accessToken
+            localStorage.setItem('token', token)
+            commit('setLoggedIn')
+            resolve(resp)
+          })
+          .catch(err => {
+            localStorage.removeItem('token')
+            reject(err)
+          })
+      })
+    },
     logout ({ commit }) {
       return new Promise((resolve) => {
         commit('logout')
