@@ -9,7 +9,7 @@
                 size="is-large"
                 type="is-primary">
             </b-icon>
-            <div class="has-text-weight-bold is-size-5">Free Park</div>
+            <div class="has-text-weight-bold is-size-5 has-text-primary">Free Park</div>
           </b-navbar-item>
         </template>
 
