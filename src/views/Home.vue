@@ -83,7 +83,8 @@
           <div class="card">
             <header class="card-header">
               <p class="card-header-title">
-                <b-icon icon="tags" type="is-success"></b-icon> <span> 今日缴费记录</span>
+                <b-icon icon="tags" type="is-success"></b-icon>
+                <span> 今日缴费记录</span>
               </p>
             </header>
             <div class="card-content">
@@ -95,7 +96,8 @@
           <div class="card">
             <header class="card-header">
               <p class="card-header-title">
-                <b-icon icon="users" type="is-info"></b-icon> <span>账号列表</span>
+                <b-icon icon="users" type="is-info"></b-icon>
+                <span>账号列表</span>
               </p>
             </header>
             <div class="card-content">
@@ -104,7 +106,16 @@
           </div>
         </div>
       </div>
+
     </div>
+    <footer class="footer">
+      <div class="content has-text-centered">
+        <p>
+          <strong>Free Park</strong> is built with <a href="https://buefy.org/" target="_blank">Buefy</a>, <a href="https://bulma.io" target="_blank">Bulma</a>,
+          and <a href="https://vuejs.org" target="_blank">Vue.js</a>.
+        </p>
+      </div>
+    </footer>
   </section>
 </template>
 
