@@ -33,52 +33,7 @@
             </template>
           </b-navbar>
         </div>
-        <div class="block" v-if="status === 'paying'">
-          <div class="card">
-            <div class="card-content">
-              <div class="block">
-                <span class="has-text-weight-bold">川AC123B </span>
-                <b-tag type="is-success">自动缴费中</b-tag>
-              </div>
-              <div class="block">
-                <p>您的车已于 08:30:00 进入停车场，缴费任务于 08:30:00 启动，第一次缴费时间为 08:30:10，每隔 60 分钟缴费一次，下次缴费时间为 09:30:10。</p>
-              </div>
-              <b-button type="is-danger">取消自动缴费</b-button>
-            </div>
-          </div>
-        </div>
-        <div class="block" v-if="status === 'none'">
-          <div class="card">
-            <div class="card-content">
-              <div class="block">
-                <p>
-                  <span class="has-text-weight-bold">川AC123B </span>
-                  <b-tag>自动缴费没有运行</b-tag>
-                </p>
-              </div>
-              <div class="block">
-                <p>周一到周五每天早上 08:30 自动启动缴费任务。您也可以点击下方按钮手动触发今天的自动缴费。</p>
-              </div>
-              <b-button>触发自动缴费</b-button>
-            </div>
-          </div>
-        </div>
-        <div class="block" v-if="status === 'checking'">
-          <div class="card">
-            <div class="card-content">
-              <div class="block">
-                <p><span class="has-text-weight-bold">川AC123B </span>
-                  <b-tag type="is-success">检测中</b-tag>
-                </p>
-              </div>
-              <div class="block">
-                <p>正在检测您的车是否进入停车场。检测任务于 08:30:00 启动，第一次检测时间为 08:30:10，每隔 20 分钟检测一次，已检测了 3 次，下次检测时间为 09:30:10。9
-                  次检测不到之后取消。</p>
-              </div>
-              <b-button type="is-danger">取消检测任务</b-button>
-            </div>
-          </div>
-        </div>
+        <car-status></car-status>
         <div class="block">
           <div class="card">
             <header class="card-header">
@@ -111,7 +66,8 @@
     <footer class="footer">
       <div class="content has-text-centered">
         <p>
-          <strong>Free Park</strong> is built with <a href="https://buefy.org/" target="_blank">Buefy</a>, <a href="https://bulma.io" target="_blank">Bulma</a>,
+          <strong>Free Park</strong> is built with <a href="https://buefy.org/" target="_blank">Buefy</a>, <a
+            href="https://bulma.io" target="_blank">Bulma</a>,
           and <a href="https://vuejs.org" target="_blank">Vue.js</a>.
         </p>
       </div>
@@ -121,9 +77,12 @@
 
 <script>
 import { mapState } from 'vuex'
+import CarStatus from '@/components/CarStatus'
 
 export default {
   name: 'Home',
+  components: { CarStatus },
+  comments: { CarStatus },
   data () {
     return {
       status: 'none',
@@ -192,7 +151,7 @@ export default {
       ]
     }
   },
-  beforeMount: function () {
+  mounted: function () {
     this.$store.dispatch('getUser')
   },
   computed: {
