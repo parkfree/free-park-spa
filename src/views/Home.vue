@@ -120,12 +120,13 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
+
 export default {
   name: 'Home',
   data () {
     return {
       status: 'none',
-      user: {},
       payments: [
         {
           'id': 1,
@@ -192,9 +193,10 @@ export default {
     }
   },
   beforeMount: function () {
-    this.$http.get('/tenant').then((response) => {
-      this.user = response.data
-    })
+    this.$store.dispatch('getUser')
+  },
+  computed: {
+    ...mapState(['user'])
   }
 }
 </script>

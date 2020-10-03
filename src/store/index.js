@@ -7,6 +7,7 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     isLoggedIn: !!localStorage.getItem('token'),
+    user: {}
   },
   mutations: {
     setLoggedIn (state) {
@@ -14,6 +15,9 @@ export default new Vuex.Store({
     },
     logout (state) {
       state.isLoggedIn = false
+    },
+    setUser (state, user) {
+      state.user = user
     }
   },
   actions: {
@@ -52,6 +56,18 @@ export default new Vuex.Store({
         commit('logout')
         localStorage.removeItem('token')
         resolve()
+      })
+    },
+    getUser ({ commit }) {
+      return new Promise((resolve, reject) => {
+        client.get('/tenant')
+          .then((response) => {
+            commit('setUser', response.data)
+            resolve(response.data)
+          })
+          .catch(err => {
+            reject(err)
+          })
       })
     }
   },
