@@ -8,7 +8,8 @@
         </div>
         <template v-if="status === 'paying'">
           <div class="block">
-            <p>您的车已于 08:30:00 进入停车场，缴费任务于 08:30:00 启动，第一次缴费时间为 08:30:10，每隔 60 分钟缴费一次，下次缴费时间为 09:30:10。</p>
+            <p>您的车已于 {{task.parkAt | onlyTime}} 进入停车场，缴费任务于 {{task.createdAt | onlyTime }} 启动，第一次缴费时间为
+              {{firstScheduleDateTime}}，每隔 {{task.periodMinutes}} 分钟缴费一次，下次缴费时间为 {{task.nextScheduledAt | onlyTime}}。</p>
           </div>
           <b-button type="is-danger">取消自动缴费</b-button>
         </template>
@@ -35,6 +36,7 @@
 
 <script>
 import { mapState } from 'vuex'
+import { DateTime } from 'luxon'
 
 const statusTags = {
   paying: '自动缴费中',
@@ -51,13 +53,18 @@ export default {
     }
   },
   filters: {
-    onlyTime: function (datetime) {
-      return datetime.split(' ')[1]
+    onlyTime: function (datetimeStr) {
+      return DateTime.fromSQL(datetimeStr).toFormat('HH:mm:ss')
     }
   },
   computed: {
     statusTag: function () {
       return statusTags[this.status]
+    },
+    firstScheduleDateTime () {
+      return DateTime.fromSQL(this.task.createdAt)
+        .plus({ minutes: this.task.initDelayMinutes })
+        .toFormat('HH:mm:ss')
     },
     ...mapState(['user'])
   },
@@ -96,7 +103,7 @@ export default {
     Promise.any([this.$http.get('/paytask'), this.$http.get('/checktask')])
       .then((response) => {
         this.task = response.data
-        this.status = response.request.uri === '/paytask' ? 'paying' : 'checking'
+        this.status = response.config.url === '/paytask' ? 'paying' : 'checking'
       })
       .catch((err) => {
         let non404Error = err.errors.find((e) => !(e.response && e.response.status === 404))
