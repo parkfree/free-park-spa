@@ -19,14 +19,14 @@
               {{task.periodMinutes}} 分钟检测一次，已检测了 {{task.checkCount}} 次，下次检测时间为
               {{task.nextScheduledAt | onlyTime}}。{{task.checkCountLimit}} 次检测不到之后取消。</p>
           </div>
-          <b-button type="is-danger" @click="cancelCheck">取消检测任务</b-button>
+          <b-button type="is-danger" @click="cancelCheckTask">取消检测任务</b-button>
         </template>
 
         <template v-if="status === 'none'">
           <div class="block">
             <p>周一到周五每天早上 08:30 启动自动缴费任务。您也可以点击下方按钮手动触发今天的自动缴费。</p>
           </div>
-          <b-button>触发自动缴费</b-button>
+          <b-button @click="createCheckTask">触发自动缴费</b-button>
         </template>
       </div>
     </div>
@@ -62,11 +62,21 @@ export default {
     ...mapState(['user'])
   },
   methods: {
-    cancelCheck () {
+    cancelCheckTask () {
       this.$http.delete('/checktask')
         .then(() => this.resetStatus())
         .catch((err) => {
           this.handleApiError(err, '取消检测任务失败')
+        })
+    },
+    createCheckTask () {
+      this.$http.post('/checktask')
+        .then((response) => {
+          this.status = 'checking'
+          this.task = response.data
+        })
+        .catch((err) => {
+          this.handleApiError(err, '创建自动缴费任务失败')
         })
     },
     resetStatus () {
