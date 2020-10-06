@@ -35,21 +35,8 @@
         </div>
         <car-status></car-status>
         <payment-list></payment-list>
-        <div class="block">
-          <div class="card">
-            <header class="card-header">
-              <p class="card-header-title">
-                <b-icon icon="users" type="is-info"></b-icon>
-                <span>账号列表</span>
-              </p>
-            </header>
-            <div class="card-content">
-              <b-table :data="payments" :columns="columns" striped hoverable></b-table>
-            </div>
-          </div>
-        </div>
+        <member-list></member-list>
       </div>
-
     </div>
     <footer class="footer">
       <div class="content has-text-centered">
@@ -67,76 +54,18 @@
 import { mapState } from 'vuex'
 import CarStatus from '@/components/CarStatus'
 import PaymentList from '@/components/TodayPayment'
+import MemberList from '@/components/MemberList'
 
 export default {
   name: 'Home',
-  components: { CarStatus, PaymentList },
+  components: {
+    CarStatus,
+    PaymentList,
+    MemberList
+  },
   data () {
     return {
       status: 'none',
-      payments: [
-        {
-          'id': 1,
-          'tenantId': 1,
-          'member': {
-            'id': 1,
-            'mobile': '13688882222'
-          },
-          'status': 'SUCCESS',
-          'amount': 300,
-          'comment': '支付成功',
-          'paidAt': '2020-09-20 00:00:03'
-        },
-        {
-          'id': 2,
-          'tenantId': 1,
-          'member': {
-            'id': 1,
-            'mobile': '13688882222'
-          },
-          'status': 'SUCCESS',
-          'amount': 300,
-          'comment': '支付成功',
-          'paidAt': '2020-09-20 00:00:03'
-        },
-        {
-          'id': 3,
-          'tenantId': 1,
-          'member': {
-            'id': 1,
-            'mobile': '13688882222'
-          },
-          'status': 'SUCCESS',
-          'amount': 300,
-          'comment': '支付成功',
-          'paidAt': '2020-09-20 00:00:03'
-        },
-      ],
-      columns: [
-        {
-          field: 'id',
-          label: '#',
-          width: '40',
-          numeric: true
-        },
-        {
-          field: 'paidAt',
-          label: '缴费时间',
-        },
-        {
-          field: 'member.mobile',
-          label: '使用账号',
-        },
-        {
-          field: 'amount',
-          label: '金额',
-          centered: true
-        },
-        {
-          field: 'comment',
-          label: '缴费结果',
-        }
-      ]
     }
   },
   mounted: function () {

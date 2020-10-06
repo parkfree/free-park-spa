@@ -10,13 +10,13 @@ import { library } from '@fortawesome/fontawesome-svg-core'
 
 import {
   faParking, faEnvelope, faKey, faCheck, faCheckCircle, faInfoCircle, faExclamationTriangle, faExclamationCircle,
-  faArrowUp, faAngleRight, faAngleLeft, faAngleDown,
-  faEye, faEyeSlash, faCaretDown, faCaretUp, faUpload, faUser, faCar, faKeyboard, faTags, faUsers
+  faArrowUp, faAngleRight, faAngleLeft, faAngleDown, faEye, faEyeSlash, faCaretDown, faCaretUp, faUpload, faUser, faCar,
+  faKeyboard, faTags, faUsers, faUserEdit, faTrashAlt
 } from '@fortawesome/free-solid-svg-icons'
 
 library.add(faParking, faEnvelope, faKey, faCheck, faCheckCircle, faInfoCircle, faExclamationTriangle, faExclamationCircle,
-  faArrowUp, faAngleRight, faAngleLeft, faAngleDown,
-  faEye, faEyeSlash, faCaretDown, faCaretUp, faUpload, faUser, faCar, faKeyboard, faTags, faUsers)
+  faArrowUp, faAngleRight, faAngleLeft, faAngleDown, faEye, faEyeSlash, faCaretDown, faCaretUp, faUpload, faUser, faCar,
+  faKeyboard, faTags, faUsers, faUserEdit, faTrashAlt)
 
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 

@@ -3,7 +3,7 @@
     <div class="card">
       <header class="card-header">
         <p class="card-header-title">
-          <b-icon icon="tags" type="is-success"></b-icon>
+          <b-icon icon="tags" type="is-primary"></b-icon>
           <span class="ml-1">今日缴费记录</span>
         </p>
       </header>
