@@ -34,19 +34,7 @@
           </b-navbar>
         </div>
         <car-status></car-status>
-        <div class="block">
-          <div class="card">
-            <header class="card-header">
-              <p class="card-header-title">
-                <b-icon icon="tags" type="is-success"></b-icon>
-                <span> 今日缴费记录</span>
-              </p>
-            </header>
-            <div class="card-content">
-              <b-table :data="payments" :columns="columns" striped hoverable></b-table>
-            </div>
-          </div>
-        </div>
+        <payment-list></payment-list>
         <div class="block">
           <div class="card">
             <header class="card-header">
@@ -78,11 +66,11 @@
 <script>
 import { mapState } from 'vuex'
 import CarStatus from '@/components/CarStatus'
+import PaymentList from '@/components/TodayPayment'
 
 export default {
   name: 'Home',
-  components: { CarStatus },
-  comments: { CarStatus },
+  components: { CarStatus, PaymentList },
   data () {
     return {
       status: 'none',
