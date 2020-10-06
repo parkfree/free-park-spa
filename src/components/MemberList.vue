@@ -6,6 +6,9 @@
           <b-icon icon="users" type="is-primary"></b-icon>
           <span class="ml-1">账号列表</span>
         </p>
+        <div class="card-header-icon">
+          <b-button type="is-primary" size="is-small" icon-left="user-plus">添加账号</b-button>
+        </div>
       </header>
       <div class="card-content">
         <template v-if="members.length === 0">
