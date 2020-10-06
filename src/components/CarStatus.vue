@@ -15,10 +15,11 @@
 
         <template v-if="status === 'checking'">
           <div class="block">
-            <p>正在检测您的车是否进入停车场。检测任务于 {{task.createdAt | onlyTime }} 启动，第一次检测时间为 {{task.createdAt | onlyTime}}，每隔 {{task.periodMinutes}} 分钟检测一次，已检测了 {{task.checkCount}} 次，下次检测时间为 {{task.nextScheduledAt | onlyTime}}。{{task.checkCountLimit}}
-              次检测不到之后取消。</p>
+            <p>正在检测您的车是否进入停车场。检测任务于 {{task.createdAt | onlyTime }} 启动，第一次检测时间为 {{task.createdAt | onlyTime}}，每隔
+              {{task.periodMinutes}} 分钟检测一次，已检测了 {{task.checkCount}} 次，下次检测时间为
+              {{task.nextScheduledAt | onlyTime}}。{{task.checkCountLimit}} 次检测不到之后取消。</p>
           </div>
-          <b-button type="is-danger">取消检测任务</b-button>
+          <b-button type="is-danger" @click="cancelCheck">取消检测任务</b-button>
         </template>
 
         <template v-if="status === 'none'">
@@ -46,7 +47,7 @@ export default {
   data () {
     return {
       status: 'none',
-      task: {}
+      task: {},
     }
   },
   filters: {
@@ -60,18 +61,39 @@ export default {
     },
     ...mapState(['user'])
   },
-  mounted () {
-    this.$http.get('/paytask').then((response) => {
-      this.status = 'paying'
-      this.task = response.data
-    }).catch(err => {
-      if (err.response && err.response.status === 404) {
-        this.$http.get('/checktask').then((response) => {
-          this.status = 'checking'
-          this.task = response.data
+  methods: {
+    cancelCheck () {
+      this.$http.delete('/checktask')
+        .then(() => this.resetStatus())
+        .catch((err) => {
+          this.handleApiError(err, '取消检测任务失败')
+        })
+    },
+    resetStatus () {
+      this.status = 'none'
+      this.task = {}
+    },
+    handleApiError (err, message) {
+      if (err.response) {
+        this.$buefy.notification.open({
+          message: `${message}：${err.response.data.message}`,
+          type: 'is-danger'
         })
       }
-    })
+    }
+  },
+  mounted () {
+    Promise.any([this.$http.get('/paytask'), this.$http.get('/checktask')])
+      .then((response) => {
+        this.task = response.data
+        this.status = response.request.uri === '/paytask' ? 'paying' : 'checking'
+      })
+      .catch((err) => {
+        let non404Error = err.errors.find((e) => !(e.response && e.response.status === 404))
+        if (non404Error) {
+          this.handleApiError(non404Error, '获取任务状态失败')
+        }
+      })
   }
 }
 </script>
