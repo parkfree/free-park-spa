@@ -11,7 +11,7 @@
             <p>您的车已于 {{task.parkAt | onlyTime}} 进入停车场，缴费任务于 {{task.createdAt | onlyTime }} 启动，第一次缴费时间为
               {{firstScheduleDateTime}}，每隔 {{task.periodMinutes}} 分钟缴费一次，下次缴费时间为 {{task.nextScheduledAt | onlyTime}}。</p>
           </div>
-          <b-button type="is-danger">取消自动缴费</b-button>
+          <b-button type="is-danger" @click="cancelPayTask">取消自动缴费</b-button>
         </template>
 
         <template v-if="status === 'checking'">
@@ -69,6 +69,13 @@ export default {
     ...mapState(['user'])
   },
   methods: {
+    cancelPayTask () {
+      this.$http.delete('/paytask')
+        .then(() => this.resetStatus())
+        .catch((err) => {
+          this.handleApiError(err, '取消自动缴费任务失败')
+        })
+    },
     cancelCheckTask () {
       this.$http.delete('/checktask')
         .then(() => this.resetStatus())
