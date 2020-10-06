@@ -4,7 +4,7 @@
       <div class="card-content">
         <div class="block">
           <span class="has-text-weight-bold">{{user.carNumber}} </span>
-          <b-tag :type="{'is-success': status !== 'none'}">{{statusTag}}</b-tag>
+          <b-tag :type="status !== 'none' ? 'is-success' : ''">{{statusTag}}</b-tag>
         </div>
         <template v-if="status === 'paying'">
           <div class="block">
@@ -15,7 +15,7 @@
 
         <template v-if="status === 'checking'">
           <div class="block">
-            <p>正在检测您的车是否进入停车场。检测任务于 08:30:00 启动，第一次检测时间为 08:30:10，每隔 20 分钟检测一次，已检测了 3 次，下次检测时间为 09:30:10。9
+            <p>正在检测您的车是否进入停车场。检测任务于 {{task.createdAt | onlyTime }} 启动，第一次检测时间为 {{task.createdAt | onlyTime}}，每隔 {{task.periodMinutes}} 分钟检测一次，已检测了 {{task.checkCount}} 次，下次检测时间为 {{task.nextScheduledAt | onlyTime}}。{{task.checkCountLimit}}
               次检测不到之后取消。</p>
           </div>
           <b-button type="is-danger">取消检测任务</b-button>
@@ -46,6 +46,12 @@ export default {
   data () {
     return {
       status: 'none',
+      task: {}
+    }
+  },
+  filters: {
+    onlyTime: function (datetime) {
+      return datetime.split(' ')[1]
     }
   },
   computed: {
@@ -53,6 +59,19 @@ export default {
       return statusTags[this.status]
     },
     ...mapState(['user'])
+  },
+  mounted () {
+    this.$http.get('/paytask').then((response) => {
+      this.status = 'paying'
+      this.task = response.data
+    }).catch(err => {
+      if (err.response && err.response.status === 404) {
+        this.$http.get('/checktask').then((response) => {
+          this.status = 'checking'
+          this.task = response.data
+        })
+      }
+    })
   }
 }
 </script>
