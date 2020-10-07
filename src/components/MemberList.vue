@@ -7,7 +7,7 @@
           <span class="ml-1">账号列表</span>
         </p>
         <div class="card-header-icon">
-          <b-button type="is-primary" size="is-small" icon-left="user-plus" @click="isAddMemberModalActive = true">
+          <b-button type="is-primary" size="is-small" icon-left="user-plus" @click="addMember">
             添加账号
           </b-button>
         </div>
@@ -37,16 +37,6 @@
         </template>
       </div>
     </div>
-    <b-modal
-        v-model="isAddMemberModalActive"
-        trap-focus
-        :width="640"
-        :destroy-on-hide="true"
-        @close="getMembers">
-      <template #default="props">
-        <add-member-form @close="props.close"></add-member-form>
-      </template>
-    </b-modal>
   </div>
 </template>
 
@@ -57,13 +47,9 @@ import handleApiErrorMixin from '@/mixins/handleApiError'
 
 export default {
   mixins: [handleApiErrorMixin],
-  components: {
-    AddMemberForm
-  },
   data () {
     return {
       members: [],
-      isAddMemberModalActive: false
     }
   },
   methods: {
@@ -92,6 +78,20 @@ export default {
         .catch((err) => {
           this.handleApiError(err, '删除账号失败')
         })
+    },
+    addMember () {
+      this.$buefy.modal.open({
+        parent: this,
+        destroyOnHide: true,
+        events: {
+          success: () => {
+            this.getMembers()
+          }
+        },
+        width: 640,
+        component: AddMemberForm,
+        trapFocus: true
+      })
     },
     updateMember (id) {
       this.$buefy.modal.open({

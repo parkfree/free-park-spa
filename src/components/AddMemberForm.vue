@@ -46,6 +46,7 @@ export default {
       this.$http.post('/members', this.member)
         .then(() => {
           this.$parent.close()
+          this.$emit('success')
           this.$buefy.notification.open({
             message: '添加账号成功',
             type: 'is-success'
