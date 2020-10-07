@@ -7,7 +7,9 @@
           <span class="ml-1">账号列表</span>
         </p>
         <div class="card-header-icon">
-          <b-button type="is-primary" size="is-small" icon-left="user-plus">添加账号</b-button>
+          <b-button type="is-primary" size="is-small" icon-left="user-plus" @click="isAddMemberModalActive = true">
+            添加账号
+          </b-button>
         </div>
       </header>
       <div class="card-content">
@@ -35,24 +37,45 @@
         </template>
       </div>
     </div>
+    <b-modal
+        v-model="isAddMemberModalActive"
+        trap-focus
+        :width="640"
+        :destroy-on-hide="true"
+        @close="getMembers">
+      <template #default="props">
+        <add-member-form @close="props.close"></add-member-form>
+      </template>
+    </b-modal>
   </div>
 </template>
 
 <script>
+import AddMemberForm from '@/components/AddMemberForm'
+
 export default {
+  components: {
+    AddMemberForm
+  },
   data () {
     return {
       members: [],
+      isAddMemberModalActive: false
+    }
+  },
+  methods: {
+    getMembers() {
+      this.$http.get('/members')
+        .then((response) => {
+          this.members = response.data
+        })
+        .catch((err) => {
+          this.handleApiError(err, '获取账号列表失败')
+        })
     }
   },
   mounted () {
-    this.$http.get('/members')
-      .then((response) => {
-        this.members = response.data
-      })
-      .catch((err) => {
-        this.handleApiError(err, '获取账号列表失败')
-      })
+    this.getMembers()
   }
 }
 </script>
