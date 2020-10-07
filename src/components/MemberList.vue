@@ -30,7 +30,7 @@
             <b-table-column v-slot="props">
               <div class="buttons">
                 <b-button type="is-primary" size="is-small" icon-right="user-edit"/>
-                <b-button type="is-danger" size="is-small" icon-right="trash-alt"  @click="deleteMember(props.row.id)"/>
+                <b-button type="is-danger" size="is-small" icon-right="trash-alt"  @click="confirmDelete(props.row.id)"/>
               </div>
             </b-table-column>
           </b-table>
@@ -74,6 +74,14 @@ export default {
         .catch((err) => {
           this.handleApiError(err, '获取账号列表失败')
         })
+    },
+    confirmDelete(id) {
+      this.$buefy.dialog.confirm({
+        message: '确定要删除账号吗？',
+        confirmText: '确认',
+        cancelText: '取消',
+        onConfirm: () => this.deleteMember(id)
+      })
     },
     deleteMember(id) {
       this.$http.delete(`/members/${id}`)
