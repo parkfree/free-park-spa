@@ -3,8 +3,12 @@
     <div class="card-content">
       <h4 class="title is-4 is-spaced">添加账号</h4>
       <form @submit.prevent="addMember">
+        <b-notification v-if="errorMessage !== ''" type="is-danger is-light">
+          {{errorMessage}}
+        </b-notification>
         <b-field label="手机号">
-          <b-input required v-model="member.mobile" placeholder="手机号" type="tel" pattern="[0-9]{11}" validation-message="输入11位手机号"></b-input>
+          <b-input required v-model="member.mobile" placeholder="手机号" type="tel" pattern="[0-9]{11}"
+                   validation-message="输入11位手机号"></b-input>
         </b-field>
         <b-field label="userId">
           <b-input required v-model="member.userId" placeholder="userId" type="text"></b-input>
@@ -18,7 +22,7 @@
           <b-input required v-model="member.memType" type="text"></b-input>
         </b-field>
 
-        <b-button type="is-primary" native-type="submit">登录</b-button>
+        <b-button type="is-primary" native-type="submit">保存</b-button>
       </form>
     </div>
   </div>
@@ -26,8 +30,9 @@
 
 <script>
 export default {
-  data: function() {
+  data: function () {
     return {
+      errorMessage: '',
       member: {
         mobile: '',
         userId: '',
@@ -42,12 +47,16 @@ export default {
         .then(() => {
           this.$parent.close()
           this.$buefy.notification.open({
-            message: '创建成功',
+            message: '添加账号成功',
             type: 'is-success'
           })
         })
         .catch((err) => {
-          this.handleApiError(err, '获取账号列表失败')
+          if (err.response) {
+            this.errorMessage = err.response.data.message
+          } else {
+            this.errorMessage = '未知错误'
+          }
         })
     }
   }

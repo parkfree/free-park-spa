@@ -52,8 +52,10 @@
 
 <script>
 import AddMemberForm from '@/components/AddMemberForm'
+import handleApiErrorMixin from '@/mixins/handleApiError'
 
 export default {
+  mixins: [handleApiErrorMixin],
   components: {
     AddMemberForm
   },

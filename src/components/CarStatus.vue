@@ -37,6 +37,7 @@
 <script>
 import { mapState } from 'vuex'
 import { DateTime } from 'luxon'
+import handleApiErrorMixin from '@/mixins/handleApiError'
 
 const statusTags = {
   paying: '自动缴费中',
@@ -46,6 +47,7 @@ const statusTags = {
 
 export default {
   name: 'CarStatus',
+  mixins: [handleApiErrorMixin],
   data () {
     return {
       status: 'none',
@@ -97,14 +99,6 @@ export default {
       this.status = 'none'
       this.task = {}
     },
-    handleApiError (err, message) {
-      if (err.response) {
-        this.$buefy.notification.open({
-          message: `${message}：${err.response.data.message}`,
-          type: 'is-danger'
-        })
-      }
-    }
   },
   mounted () {
     Promise.any([this.$http.get('/paytask'), this.$http.get('/checktask')])

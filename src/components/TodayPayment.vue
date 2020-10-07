@@ -35,7 +35,9 @@
 </template>
 
 <script>
+import handleApiErrorMixin from '@/mixins/handleApiError'
 export default {
+  mixins: [handleApiErrorMixin],
   filters: {
     currency: function (amount) {
       return `￥${amount / 100}`
@@ -66,7 +68,7 @@ export default {
         this.payments = response.data
       })
       .catch((err) => {
-        this.handleApiError(err, '获取任务状态失败')
+        this.handleApiError(err, '获取缴费记录失败')
       })
   }
 }
