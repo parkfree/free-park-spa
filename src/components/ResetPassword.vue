@@ -50,6 +50,7 @@ export default {
       errorMessage: '',
       oldPassword: '',
       newPassword: '',
+      passwordConfirm: ''
     }
   },
   methods: {
