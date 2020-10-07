@@ -27,10 +27,10 @@
             <b-table-column field="userId" label="userId" v-slot="props">
               {{ props.row.userId }}
             </b-table-column>
-            <b-table-column>
+            <b-table-column v-slot="props">
               <div class="buttons">
                 <b-button type="is-primary" size="is-small" icon-right="user-edit"/>
-                <b-button type="is-danger" size="is-small" icon-right="trash-alt"/>
+                <b-button type="is-danger" size="is-small" icon-right="trash-alt"  @click="deleteMember(props.row.id)"/>
               </div>
             </b-table-column>
           </b-table>
@@ -73,6 +73,15 @@ export default {
         })
         .catch((err) => {
           this.handleApiError(err, '获取账号列表失败')
+        })
+    },
+    deleteMember(id) {
+      this.$http.delete(`/members/${id}`)
+        .then(() => {
+          this.getMembers()
+        })
+        .catch((err) => {
+          this.handleApiError(err, '删除账号失败')
         })
     }
   },
