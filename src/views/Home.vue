@@ -68,7 +68,7 @@ export default {
       status: 'none',
     }
   },
-  mounted: function () {
+  mounted () {
     this.$store.dispatch('getUser')
   },
   computed: {

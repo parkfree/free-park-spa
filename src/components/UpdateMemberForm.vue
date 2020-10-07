@@ -11,13 +11,13 @@
                    validation-message="输入11位手机号"></b-input>
         </b-field>
         <b-field label="userId">
-          <b-input required v-model="member.userId" placeholder="userId" type="text" minlength="32"
-                   maxlength="32"></b-input>
+          <b-input required v-model="member.userId" placeholder="userId" type="text" pattern="[a-f0-9]{32}"
+                   validation-message="只允许字符：[a-f0-9]，且长度必须为32"></b-input>
         </b-field>
 
         <b-field label="openId">
-          <b-input required v-model="member.openId" placeholder="openId" type="text" minlength="28"
-                   maxlength="28"></b-input>
+          <b-input required v-model="member.openId" placeholder="openId" type="text" pattern="[A-Za-z0-9_\-]{28}"
+                   validation-message="只允许字符：[A-Za-z0-9_\-]，且长度必须为28"></b-input>
         </b-field>
 
         <b-field label="会员类型">
