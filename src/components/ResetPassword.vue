@@ -16,17 +16,17 @@
           </b-notification>
 
           <b-field label="旧密码" horizontal>
-            <b-input required v-model="oldPassword" placeholder="密码" type="password" icon="key"
+            <b-input required v-model="oldPassword" placeholder="旧密码" type="password" icon="key"
                      password-reveal></b-input>
           </b-field>
 
           <b-field label="新密码" horizontal>
-            <b-input required v-model="newPassword" placeholder="密码" type="password" icon="key"
+            <b-input required v-model="newPassword" placeholder="新密码" type="password" icon="key"
                      password-reveal></b-input>
           </b-field>
 
           <b-field label="确认密码" horizontal>
-            <b-input required v-model="passwordConfirm" placeholder="确认密码" type="password" icon="key"
+            <b-input required v-model="passwordConfirm" placeholder="再次输入新密码" type="password" icon="key"
                      password-reveal></b-input>
           </b-field>
 
