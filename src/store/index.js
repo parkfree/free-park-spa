@@ -69,6 +69,18 @@ export default new Vuex.Store({
             reject(err)
           })
       })
+    },
+    updateUser ({ commit }, data) {
+      return new Promise((resolve, reject) => {
+        client.put('/tenant', data)
+          .then((response) => {
+            commit('setUser', response.data)
+            resolve(response.data)
+          })
+          .catch(err => {
+            reject(err)
+          })
+      })
     }
   },
   getters: {},

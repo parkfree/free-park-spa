@@ -20,7 +20,7 @@
 
             <template slot="end">
               <b-navbar-dropdown :label="user.owner">
-                <b-navbar-item href="#">
+                <b-navbar-item tag="router-link" :to="{path: '/setting'}">
                   个人设置
                 </b-navbar-item>
                 <b-navbar-item @click="logout">

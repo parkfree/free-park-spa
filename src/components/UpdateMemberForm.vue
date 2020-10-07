@@ -31,7 +31,10 @@
 </template>
 
 <script>
+import handleApiErrorMixin from '@/mixins/handleApiError'
+
 export default {
+  mixins: [handleApiErrorMixin],
   props: {
     id: {
       type: Number,
