@@ -19,9 +19,6 @@
             </template>
 
             <template slot="end">
-              <b-navbar-item href="#">
-                管理界面
-              </b-navbar-item>
               <b-navbar-dropdown :label="user.owner">
                 <b-navbar-item href="#">
                   个人设置
