@@ -21,7 +21,7 @@
             <b-table-column field="mobile" label="手机号" v-slot="props">
               {{ props.row.mobile }}
             </b-table-column>
-            <b-table-column field="lastPaidAt" label="最近使用日" v-slot="props">
+            <b-table-column field="lastPaidAt" label="缴费日期" v-slot="props">
               {{ props.row.lastPaidAt }}
             </b-table-column>
             <b-table-column field="userId" label="userId" v-slot="props">
