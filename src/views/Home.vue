@@ -26,7 +26,7 @@
                 <b-navbar-item href="#">
                   个人设置
                 </b-navbar-item>
-                <b-navbar-item href="#">
+                <b-navbar-item @click="logout">
                   退出
                 </b-navbar-item>
               </b-navbar-dropdown>
@@ -63,9 +63,10 @@ export default {
     PaymentList,
     MemberList
   },
-  data () {
-    return {
-      status: 'none',
+  methods: {
+    logout () {
+      this.$store.dispatch('logout')
+        .then(() => this.$router.push('/login'))
     }
   },
   mounted () {
