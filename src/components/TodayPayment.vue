@@ -6,6 +6,12 @@
           <b-icon icon="tags" type="is-primary"></b-icon>
           <span class="ml-1">今日缴费记录</span>
         </p>
+        <div class="card-header-icon">
+          <b-button type="is-primary" size="is-small" icon-left="yen-sign" @click="confirmPayment"
+                    :loading="createPaymentLoading">
+            缴费一次
+          </b-button>
+        </div>
       </header>
       <div class="card-content">
         <template v-if="payments.length === 0">
@@ -36,6 +42,7 @@
 
 <script>
 import handleApiErrorMixin from '@/mixins/handleApiError'
+
 export default {
   mixins: [handleApiErrorMixin],
   filters: {
@@ -55,21 +62,50 @@ export default {
         case 'NO_AVAILABLE_MEMBER':
           return 'is-danger'
       }
+    },
+    confirmPayment () {
+      this.$buefy.dialog.confirm({
+        message: '确定要手动缴费一次吗？',
+        confirmText: '确认',
+        cancelText: '取消',
+        onConfirm: () => this.createPayment()
+      })
+    },
+    createPayment () {
+      this.createPaymentLoading = true
+      this.$http.post('/payments')
+        .then((response) => {
+          this.$buefy.notification.open({
+            message: '缴费结果：' + response.data.comment,
+            type: response.data.status === 'SUCCESS' ? 'is-success' : 'is-danger'
+          })
+          this.getPayments()
+        })
+        .catch((err) => {
+          this.handleApiError(err, '缴费失败')
+        })
+        .finally(() => {
+          this.createPaymentLoading = false
+        })
+    },
+    getPayments () {
+      this.$http.get('/payments/today')
+        .then((response) => {
+          this.payments = response.data
+        })
+        .catch((err) => {
+          this.handleApiError(err, '获取缴费记录失败')
+        })
     }
   },
   data () {
     return {
-      payments: []
+      payments: [],
+      createPaymentLoading: false
     }
   },
   mounted () {
-    this.$http.get('/payments/today')
-      .then((response) => {
-        this.payments = response.data
-      })
-      .catch((err) => {
-        this.handleApiError(err, '获取缴费记录失败')
-      })
+    this.getPayments()
   }
 }
 </script>
