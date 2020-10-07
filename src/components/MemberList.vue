@@ -29,8 +29,8 @@
             </b-table-column>
             <b-table-column v-slot="props">
               <div class="buttons">
-                <b-button type="is-primary" size="is-small" icon-right="user-edit"/>
-                <b-button type="is-danger" size="is-small" icon-right="trash-alt"  @click="confirmDelete(props.row.id)"/>
+                <b-button type="is-primary" size="is-small" icon-right="user-edit" @click="updateMember(props.row.id)"/>
+                <b-button type="is-danger" size="is-small" icon-right="trash-alt" @click="confirmDelete(props.row.id)"/>
               </div>
             </b-table-column>
           </b-table>
@@ -52,6 +52,7 @@
 
 <script>
 import AddMemberForm from '@/components/AddMemberForm'
+import UpdateMemberForm from '@/components/UpdateMemberForm'
 import handleApiErrorMixin from '@/mixins/handleApiError'
 
 export default {
@@ -66,7 +67,7 @@ export default {
     }
   },
   methods: {
-    getMembers() {
+    getMembers () {
       this.$http.get('/members')
         .then((response) => {
           this.members = response.data
@@ -75,7 +76,7 @@ export default {
           this.handleApiError(err, '获取账号列表失败')
         })
     },
-    confirmDelete(id) {
+    confirmDelete (id) {
       this.$buefy.dialog.confirm({
         message: '确定要删除账号吗？',
         confirmText: '确认',
@@ -83,7 +84,7 @@ export default {
         onConfirm: () => this.deleteMember(id)
       })
     },
-    deleteMember(id) {
+    deleteMember (id) {
       this.$http.delete(`/members/${id}`)
         .then(() => {
           this.getMembers()
@@ -91,6 +92,21 @@ export default {
         .catch((err) => {
           this.handleApiError(err, '删除账号失败')
         })
+    },
+    updateMember (id) {
+      this.$buefy.modal.open({
+        parent: this,
+        destroyOnHide: true,
+        props: { id },
+        events: {
+          success: () => {
+            this.getMembers()
+          }
+        },
+        width: 640,
+        component: UpdateMemberForm,
+        trapFocus: true
+      })
     }
   },
   mounted () {
