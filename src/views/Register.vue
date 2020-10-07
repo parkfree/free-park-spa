@@ -74,6 +74,7 @@ export default {
       if (this.passwordConfirm !== this.password) {
         this.hasError = true
         this.errorMessage = '两次密码输入不一致'
+        return
       }
 
       this.$store.dispatch('register', {

@@ -37,18 +37,21 @@
         </div>
       </div>
     </div>
+    <reset-password></reset-password>
   </user-container>
 </template>
 
 <script>
 import UserContainer from '@/components/UserContainer'
+import ResetPassword from '@/components/ResetPassword'
 import handleApiErrorMixin from '@/mixins/handleApiError'
 
 export default {
   mixins: [handleApiErrorMixin],
   name: 'Setting',
   components: {
-    UserContainer
+    UserContainer,
+    ResetPassword
   },
   data: function () {
     return {
