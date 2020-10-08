@@ -3,8 +3,21 @@
     <div class="card">
       <div class="card-content">
         <div class="block">
-          <span class="has-text-weight-bold">{{user.carNumber}} </span>
-          <b-tag :type="status !== 'none' ? 'is-success' : ''">{{statusTag}}</b-tag>
+          <div class="level">
+            <div class="level-left">
+              <div class="level-item">
+                <span class="has-text-weight-bold mr-2">{{user.carNumber}}</span>
+                <b-tag :type="status !== 'none' ? 'is-success' : ''">{{statusTag}}</b-tag>
+              </div>
+            </div>
+            <div class="level-right">
+              <div v-if="user.totalPaidAmount" class="level-item">
+                已累计为您节省：<strong class="is-size-5 has-text-primary">{{user.totalPaidAmount | currency}}</strong>
+              </div>
+            </div>
+          </div>
+          <div>
+          </div>
         </div>
         <template v-if="status === 'paying'">
           <div class="block">
@@ -57,6 +70,9 @@ export default {
   filters: {
     onlyTime: function (datetimeStr) {
       return DateTime.fromSQL(datetimeStr).toFormat('HH:mm:ss')
+    },
+    currency: function (amount) {
+      return `￥${amount / 100}`
     }
   },
   computed: {
