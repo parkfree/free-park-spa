@@ -23,7 +23,7 @@
               {{ props.row.paidAt }}
             </b-table-column>
             <b-table-column field="member.mobile" label="使用账号" v-slot="props">
-              {{ props.row.member.mobile }}
+              {{ props.row.member ? props.row.member.mobile : "无" }}
             </b-table-column>
             <b-table-column field="amount" label="缴费金额" v-slot="props">
               {{ props.row.amount | currency }}
