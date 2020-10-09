@@ -35,6 +35,7 @@
     </div>
     <footer class="footer">
       <div class="content has-text-centered">
+        <p>Free Park 是非盈利项目，不保证高可用性。使用 Free Park 代表您同意自己承担可能的任何后果。</p>
         <p>
           <strong>Free Park</strong> is built with <a href="https://buefy.org/" target="_blank">Buefy</a>, <a
             href="https://bulma.io" target="_blank">Bulma</a>, and <a href="https://vuejs.org"
