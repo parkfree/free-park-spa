@@ -29,7 +29,7 @@
 
         <template v-if="status === 'checking'">
           <div class="block">
-            <p>正在检测您的车是否进入停车场。检测任务于 {{task.createdAt | onlyTime }} 启动，第一次检测时间为 {{task.createdAt | onlyTime}}，每隔
+            <p>正在检测您的车是否进入停车场。检测任务于 {{task.createdAt | onlyTime }} 启动，第一次检测时间为 {{firstScheduleDateTime}}，每隔
               {{task.periodMinutes}} 分钟检测一次，已检测了 {{task.checkCount}} 次，下次检测时间为
               {{task.nextScheduledAt | onlyTime}}。{{task.checkCountLimit}} 次检测不到之后取消。</p>
           </div>
@@ -81,7 +81,7 @@ export default {
     },
     firstScheduleDateTime () {
       return DateTime.fromSQL(this.task.createdAt)
-        .plus({ minutes: this.task.initDelayMinutes })
+        .plus({ seconds: this.task.initDelaySeconds })
         .toFormat('HH:mm:ss')
     },
     ...mapState(['user'])
