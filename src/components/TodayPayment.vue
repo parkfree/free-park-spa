@@ -60,6 +60,8 @@ export default {
           return 'is-warning'
         case 'NEED_WECHAT_PAY':
         case 'NO_AVAILABLE_MEMBER':
+        case 'PAY_API_ERROR':
+        case 'PARK_DETAIL_API_ERROR':
           return 'is-danger'
       }
     },
