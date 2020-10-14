@@ -5,25 +5,7 @@ import store from './store'
 import Buefy from 'buefy'
 import client from './api/client'
 
-import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-import { library } from '@fortawesome/fontawesome-svg-core'
-
-import {
-  faParking, faEnvelope, faKey, faCheck, faCheckCircle, faInfoCircle, faExclamationTriangle, faExclamationCircle,
-  faArrowUp, faAngleRight, faAngleLeft, faAngleDown, faEye, faEyeSlash, faCaretDown, faCaretUp, faUpload, faUser, faCar,
-  faKeyboard, faTags, faUsers, faUserEdit, faTrashAlt, faUserPlus, faYenSign
-} from '@fortawesome/free-solid-svg-icons'
-
-library.add(faParking, faEnvelope, faKey, faCheck, faCheckCircle, faInfoCircle, faExclamationTriangle, faExclamationCircle,
-  faArrowUp, faAngleRight, faAngleLeft, faAngleDown, faEye, faEyeSlash, faCaretDown, faCaretUp, faUpload, faUser, faCar,
-  faKeyboard, faTags, faUsers, faUserEdit, faTrashAlt, faUserPlus, faYenSign)
-
-Vue.component('font-awesome-icon', FontAwesomeIcon)
-
-Vue.use(Buefy, {
-  defaultIconComponent: 'font-awesome-icon',
-  defaultIconPack: 'fas'
-})
+Vue.use(Buefy, { defaultIconPack: 'fas' })
 
 Vue.prototype.$http = client
 
