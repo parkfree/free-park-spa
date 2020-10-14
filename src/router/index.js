@@ -6,6 +6,8 @@ import Login from '../views/Login.vue'
 import Register from '../views/Register'
 import Setting from '../views/Setting'
 
+import AdminHome from '../views/admin/AdminHome'
+
 Vue.use(VueRouter)
 
 const routes = [
@@ -31,6 +33,11 @@ const routes = [
     path: '/setting',
     name: 'setting',
     component: Setting
+  },
+  {
+    path: '/admin',
+    name: 'admin-home',
+    component: AdminHome
   },
   {
     path: '/about',
