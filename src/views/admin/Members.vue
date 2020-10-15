@@ -5,7 +5,7 @@
         <header class="card-header">
           <p class="card-header-title">
             <b-icon icon="users" type="is-primary" class="mr-1"></b-icon>
-            <span class="has-text-weight-bold mr-2">用户列表</span>
+            <span class="has-text-weight-bold mr-2">Members</span>
           </p>
         </header>
         <div class="card-content">

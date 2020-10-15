@@ -6,7 +6,9 @@ import Login from '../views/Login.vue'
 import Register from '../views/Register'
 import Setting from '../views/Setting'
 
-import AdminHome from '../views/admin/AdminHome'
+import Admin from '@/views/admin/Admin'
+import AdminHome from "@/views/admin/AdminHome";
+import Members from "@/views/admin/Members";
 
 Vue.use(VueRouter)
 
@@ -36,8 +38,19 @@ const routes = [
   },
   {
     path: '/admin',
-    name: 'admin-home',
-    component: AdminHome
+    component: Admin,
+    children: [
+      {
+        path: '',
+        name: 'admin-home',
+        component: AdminHome
+      },
+      {
+        path: 'members',
+        name: 'admin-members',
+        component: Members
+      }
+    ]
   },
   {
     path: '/about',
