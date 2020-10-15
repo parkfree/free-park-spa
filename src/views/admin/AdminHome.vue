@@ -1,27 +1,15 @@
 <template>
   <div>
-    <div class="block">
-      <div class="card">
-        <header class="card-header">
-          <p class="card-header-title">
-            <b-icon icon="users" type="is-primary" class="mr-1"></b-icon>
-            <span class="has-text-weight-bold mr-2">用户列表</span>
-          </p>
-        </header>
-        <div class="card-content">
-          <admin-members></admin-members>
-        </div>
-      </div>
-    </div>
+    <check-tasks></check-tasks>
   </div>
 </template>
 
 <script>
-import AdminMembers from '@/components/admin/AdminMembers'
+import CheckTasks from '@/components/admin/CheckTasks'
 
 export default {
   components: {
-    AdminMembers
+    CheckTasks
   },
 }
 </script>
