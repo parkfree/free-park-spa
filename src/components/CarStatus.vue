@@ -14,8 +14,6 @@
           </div>
         </div>
       </div>
-      <div>
-      </div>
     </div>
     <template v-if="status === 'paying'">
       <div class="block">
