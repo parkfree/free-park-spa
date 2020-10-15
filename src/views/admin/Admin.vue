@@ -29,18 +29,6 @@
   </section>
 </template>
 
-<script>
-export default {
-  data () {
-    return {
-      expandOnHover: false,
-      mobile: 'reduce',
-      reduce: false
-    }
-  }
-}
-</script>
-
 <style lang="scss" scoped>
   .p-1 {
     padding: 1em;
