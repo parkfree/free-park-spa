@@ -8,6 +8,7 @@ import Setting from '../views/Setting'
 
 import Admin from '@/views/admin/Admin'
 import AdminHome from "@/views/admin/AdminHome";
+import TenantInfo from "@/views/admin/TenantInfo";
 import Members from "@/views/admin/Members";
 
 Vue.use(VueRouter)
@@ -44,6 +45,11 @@ const routes = [
         path: '',
         name: 'admin-home',
         component: AdminHome
+      },
+      {
+        path: 'tenant/:id',
+        name: 'admin-tenant',
+        component: TenantInfo
       },
       {
         path: 'members',

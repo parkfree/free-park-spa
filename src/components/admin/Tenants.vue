@@ -28,9 +28,9 @@
             {{ props.row.createdAt }}
           </b-table-column>
 
-          <b-table-column label="操作">
+          <b-table-column label="操作" v-slot="props">
             <div class="buttons">
-              <b-button type="is-danger" size="is-small" icon-right="trash-alt"></b-button>
+              <b-button type="is-info" size="is-small" icon-right="info-circle" tag="router-link" :to="{path: '/admin/tenant/' + props.row.id}"></b-button>
             </div>
           </b-table-column>
         </b-table>
