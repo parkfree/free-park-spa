@@ -1,8 +1,8 @@
 <template>
   <div>
-    <car-status :tenant-id="$route.params.id"></car-status>
-    <today-payment :tenant-id="$route.params.id"></today-payment>
-    <member-list :tenant-id="$route.params.id"></member-list>
+    <car-status :tenant-id="id"></car-status>
+    <today-payment :tenant-id="id"></today-payment>
+    <member-list :tenant-id="id"></member-list>
   </div>
 </template>
 
@@ -13,6 +13,12 @@ import MemberList from '@/components/admin/tenant/MemberList'
 
 export default {
   name: 'Home',
+  props: {
+    id: {
+      type: Number,
+      required: true
+    }
+  },
   components: {
     CarStatus,
     TodayPayment,

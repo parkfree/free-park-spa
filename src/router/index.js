@@ -49,7 +49,14 @@ const routes = [
       {
         path: 'tenant/:id',
         name: 'admin-tenant',
-        component: TenantInfo
+        component: TenantInfo,
+        props: (route) => {
+          const id = Number.parseInt(route.params.id, 10)
+          if (Number.isNaN(id)) {
+            return 0
+          }
+          return {id}
+        }
       },
       {
         path: 'members',
