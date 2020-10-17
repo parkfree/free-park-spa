@@ -19,6 +19,9 @@
             </template>
 
             <template slot="end">
+              <b-navbar-item v-if="user.role === 'ROLE_ADMIN'" tag="router-link" :to="{path: '/admin'}">
+                控制台
+              </b-navbar-item>
               <b-navbar-dropdown :label="user.owner">
                 <b-navbar-item tag="router-link" :to="{path: '/setting'}">
                   个人设置
