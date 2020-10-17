@@ -10,6 +10,7 @@ import Admin from '@/views/admin/Admin'
 import AdminHome from "@/views/admin/AdminHome";
 import TenantInfo from "@/views/admin/TenantInfo";
 import Members from "@/views/admin/Members";
+import Payments from '@/views/admin/Payments'
 
 Vue.use(VueRouter)
 
@@ -62,6 +63,11 @@ const routes = [
         path: 'members',
         name: 'admin-members',
         component: Members
+      },
+      {
+        path: 'payments',
+        name: 'admin-payments',
+        component: Payments
       }
     ]
   },

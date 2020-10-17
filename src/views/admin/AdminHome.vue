@@ -1,8 +1,8 @@
 <template>
   <div>
+    <tenants></tenants>
     <pay-tasks></pay-tasks>
     <check-tasks></check-tasks>
-    <tenants></tenants>
   </div>
 </template>
 
