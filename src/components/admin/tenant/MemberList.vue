@@ -92,7 +92,7 @@ export default {
       })
     },
     deleteMember (id) {
-      this.$http.delete(`/members/${id}`)
+      this.$http.delete(`/admin/members/${id}`)
         .then(() => {
           this.getMembers()
         })

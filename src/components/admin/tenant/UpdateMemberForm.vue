@@ -49,7 +49,10 @@ import handleApiErrorMixin from '@/mixins/handleApiError'
 export default {
   mixins: [handleApiErrorMixin],
   props: {
-    tenantId: Number,
+    tenantId: {
+      type: Number,
+      required: true
+    },
     id: {
       type: Number,
       required: true
@@ -71,7 +74,7 @@ export default {
   },
   methods: {
     getMember () {
-      this.$http.get(`/members/${this.id}`)
+      this.$http.get(`/admin/members/${this.id}`)
         .then((response) => {
           this.member = response.data
         })
