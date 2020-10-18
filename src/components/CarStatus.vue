@@ -10,7 +10,10 @@
         </div>
         <div class="level-right">
           <div v-if="user.totalPaidAmount" class="level-item">
-            已累计为您节省：<strong class="is-size-5 has-text-primary">{{user.totalPaidAmount | currency}}</strong>
+            已累计为您节省：
+            <b-tooltip label="点击打赏开发者" position="is-right">
+              <a @click="donate()"><strong class="is-size-5 has-text-primary">{{user.totalPaidAmount | currency}}</strong></a>
+            </b-tooltip>
           </div>
         </div>
       </div>
@@ -38,6 +41,15 @@
       </div>
       <b-button @click="createCheckTask">触发自动缴费</b-button>
     </template>
+
+    <b-modal v-model="isDonateModalActive" :width="200">
+      <div class="box">
+        <p class="has-text-centered mb-4">扫码打赏作者</p>
+        <p class="image is-1by1">
+          <img src="../assets/donate.png">
+        </p>
+      </div>
+    </b-modal>
   </div>
 </template>
 
@@ -58,6 +70,7 @@ export default {
   data () {
     return {
       status: 'none',
+      isDonateModalActive: false,
       task: {},
     }
   },
@@ -87,6 +100,9 @@ export default {
         .catch((err) => {
           this.handleApiError(err, '取消自动缴费任务失败')
         })
+    },
+    donate () {
+      this.isDonateModalActive = true
     },
     cancelCheckTask () {
       this.$http.delete('/checktask')
