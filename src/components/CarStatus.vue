@@ -44,7 +44,7 @@
 
     <b-modal v-model="isDonateModalActive" :width="200">
       <div class="box">
-        <p class="has-text-centered mb-4">扫码打赏作者</p>
+        <p class="has-text-centered mb-4">微信扫码打赏</p>
         <p class="image is-1by1">
           <img src="../assets/donate.png">
         </p>
