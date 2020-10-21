@@ -7,6 +7,9 @@
             <b-icon icon="users" type="is-primary" class="mr-1"></b-icon>
             <span class="has-text-weight-bold mr-2">账号列表</span>
           </p>
+          <div class="card-header-icon">
+            <p>{{ total }} 条记录</p>
+          </div>
         </header>
         <div class="card-content">
           <section>
