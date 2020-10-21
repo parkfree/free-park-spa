@@ -19,7 +19,8 @@
             {{ props.row.owner }}
           </b-table-column>
           <b-table-column field="nextScheduledAt" label="角色" v-slot="props">
-            {{ props.row.role === 'ROLE_ADMIN' ? 'ADMIN' : 'USER' }}
+            <b-tag v-if="props.row.role === 'ROLE_ADMIN'" type="is-success">ADMIN</b-tag>
+            <b-tag v-else>USER</b-tag>
           </b-table-column>
           <b-table-column field="periodMinutes" label="总缴费" v-slot="props">
             {{ props.row.totalPaidAmount / 100 }}
