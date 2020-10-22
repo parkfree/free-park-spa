@@ -18,6 +18,9 @@
           <b-table-column field="owner" label="名字" v-slot="props">
             {{ props.row.owner }}
           </b-table-column>
+          <b-table-column field="email" label="Email" v-slot="props">
+            {{ props.row.email }}
+          </b-table-column>
           <b-table-column field="nextScheduledAt" label="角色" v-slot="props">
             <b-tag v-if="props.row.role === 'ROLE_ADMIN'" type="is-success">ADMIN</b-tag>
             <b-tag v-else>USER</b-tag>
