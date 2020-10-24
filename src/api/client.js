@@ -21,7 +21,7 @@ const authInterceptor = (config) => {
 client.interceptors.request.use(authInterceptor)
 
 const errorInterceptor = (err) => {
-  if (err.status === 401) {
+  if (err.response && err.response.status === 401) {
     store.dispatch('logout')
     router.push('/login')
   }
