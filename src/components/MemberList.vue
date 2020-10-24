@@ -26,6 +26,10 @@
               {{ props.row.name }}
             </b-table-column>
 
+            <b-table-column field="points" label="积分" v-slot="props">
+              {{ props.row.points }}
+            </b-table-column>
+
             <b-table-column field="enablePoint" label="参与领积分" v-slot="props">
               <b-tag v-if="props.row.enablePoint" type="is-success">是</b-tag>
               <b-tag v-else>否</b-tag>

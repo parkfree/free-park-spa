@@ -24,6 +24,7 @@
                   <option value="NO_AVAILABLE_MEMBER">NO_AVAILABLE_MEMBER</option>
                   <option value="PAY_API_ERROR">PAY_API_ERROR</option>
                   <option value="PARK_DETAIL_API_ERROR">PARK_DETAIL_API_ERROR</option>
+                  <option value="MEMBER_NO_DISCOUNT">MEMBER_NO_DISCOUNT</option>
                 </b-select>
 
                 <b-datetimepicker
@@ -155,6 +156,7 @@ export default {
         case 'NO_AVAILABLE_MEMBER':
         case 'PAY_API_ERROR':
         case 'PARK_DETAIL_API_ERROR':
+        case 'MEMBER_NO_DISCOUNT':
           return 'is-danger'
       }
     },

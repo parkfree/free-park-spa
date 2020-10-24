@@ -38,6 +38,10 @@
                 {{ props.row.name }}
               </b-table-column>
 
+              <b-table-column field="points" label="积分" v-slot="props">
+                {{ props.row.points }}
+              </b-table-column>
+
               <b-table-column field="name" label="手机号" v-slot="props">
                 {{ props.row.mobile }}
               </b-table-column>

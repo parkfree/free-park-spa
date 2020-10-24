@@ -62,6 +62,7 @@ export default {
         case 'NO_AVAILABLE_MEMBER':
         case 'PAY_API_ERROR':
         case 'PARK_DETAIL_API_ERROR':
+        case 'MEMBER_NO_DISCOUNT':
           return 'is-danger'
       }
     },
