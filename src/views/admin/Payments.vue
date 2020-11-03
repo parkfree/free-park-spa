@@ -45,9 +45,9 @@
                   :timepicker="{ enableSeconds: true, hourFormat: '24' }">
                 </b-datetimepicker>
 
-                <b-input placeholder="用户ID" v-model="searchParams.tenantId"></b-input>
+                <b-input placeholder="车牌号" v-model="searchParams.carNumber"></b-input>
 
-                <b-input placeholder="账号ID" v-model="searchParams.memberId"></b-input>
+                <b-input placeholder="手机号" v-model="searchParams.mobile"></b-input>
 
                 <p class="control">
                   <button class="button is-primary" @click="search">搜索</button>
@@ -134,8 +134,8 @@ export default {
         from: null,
         to: null,
         status: null,
-        tenantId: null,
-        memberId: null
+        carNumber: null,
+        mobile: null
       }
     }
   },
