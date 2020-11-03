@@ -22,11 +22,14 @@
 
                 paginated
                 backend-pagination
+                backend-sorting
+
                 :total="total"
                 :per-page="20"
-                @page-change="onPageChange">
+                @page-change="onPageChange"
+                @sort="onSortChange">
 
-              <b-table-column field="id" label="ID" v-slot="props">
+              <b-table-column field="id" label="ID" sortable v-slot="props">
                 {{ props.row.id }}
               </b-table-column>
 
@@ -38,7 +41,7 @@
                 {{ props.row.name }}
               </b-table-column>
 
-              <b-table-column field="points" label="积分" v-slot="props">
+              <b-table-column field="points" label="积分" sortable v-slot="props">
                 {{ props.row.points }}
               </b-table-column>
 
@@ -56,11 +59,11 @@
                 <b-tag v-else>否</b-tag>
               </b-table-column>
 
-              <b-table-column field="lastPaidAt" label="缴费日期" v-slot="props">
+              <b-table-column field="lastPaidAt" label="缴费日期" sortable v-slot="props">
                 {{ props.row.lastPaidAt }}
               </b-table-column>
 
-              <b-table-column field="createdAt" label="创建日期" v-slot="props">
+              <b-table-column field="createdAt" label="创建日期" sortable v-slot="props">
                 {{ props.row.createdAt }}
               </b-table-column>
 
@@ -98,13 +101,15 @@ export default {
       members: [],
       total: 0,
       page: 0,
+      sortField: 'createdAt',
+      sortOrder: 'desc',
       loading: true,
     }
   },
   methods: {
     getMemberPage () {
       this.loading = true
-      this.$http.get(`/admin/members?page=${this.page}&size=20&sort=createdAt,desc`)
+      this.$http.get(`/admin/members?page=${this.page}&size=20&sort=${this.sortField},${this.sortOrder}`)
         .then((response) => {
           this.members = response.data.content
           this.page = response.data.number
@@ -117,9 +122,13 @@ export default {
           this.loading = false
         })
     },
-
     onPageChange (page) {
       this.page = page - 1;
+      this.getMemberPage()
+    },
+    onSortChange (field, order) {
+      this.sortField = field
+      this.sortOrder = order
       this.getMemberPage()
     },
     confirmDelete (id) {
