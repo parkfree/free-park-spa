@@ -8,8 +8,8 @@
         </p>
       </header>
       <div class="card-content">
-        <b-table :data="tenants" striped hoverable scrollable>
-          <b-table-column field="tenantId" label="ID" v-slot="props">
+        <b-table :data="tenants" striped hoverable scrollable :default-sort="['totalPaidAmount', 'desc']">
+          <b-table-column sortable field="id" label="ID" v-slot="props">
             {{ props.row.id }}
           </b-table-column>
           <b-table-column field="carNumber" label="车牌号" v-slot="props">
@@ -25,7 +25,7 @@
             <b-tag v-if="props.row.role === 'ROLE_ADMIN'" type="is-success">ADMIN</b-tag>
             <b-tag v-else>USER</b-tag>
           </b-table-column>
-          <b-table-column field="periodMinutes" label="总缴费" v-slot="props">
+          <b-table-column sortable field="totalPaidAmount" label="总缴费" v-slot="props">
             {{ props.row.totalPaidAmount / 100 }}
           </b-table-column>
           <b-table-column field="createdAt" label="注册时间" v-slot="props">
