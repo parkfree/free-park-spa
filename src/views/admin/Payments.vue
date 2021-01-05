@@ -83,6 +83,10 @@
                 {{ props.row.member ? `${props.row.member.mobile} (${props.row.member.name})` : '无' }}
               </b-table-column>
 
+              <b-table-column field="member" label="优惠券" v-slot="props">
+                {{ props.row.qrCode }} | {{ props.row.facePrice }}
+              </b-table-column>
+
               <b-table-column field="amount" label="缴费金额" v-slot="props">
                 {{ props.row.amount | currency }}
               </b-table-column>
