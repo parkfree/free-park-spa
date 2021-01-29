@@ -30,7 +30,7 @@
               {{ props.row.points }}
             </b-table-column>
 
-            <b-table-column field="points" label="停车券" v-slot="props">
+            <b-table-column field="coupons" label="停车券" v-slot="props">
               {{ props.row.coupons }}
             </b-table-column>
 

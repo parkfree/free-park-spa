@@ -45,6 +45,10 @@
                 {{ props.row.points }}
               </b-table-column>
 
+              <b-table-column field="coupons" label="停车券" sortable v-slot="props">
+                {{ props.row.coupons }}
+              </b-table-column>
+
               <b-table-column field="name" label="手机号" v-slot="props">
                 {{ props.row.mobile }}
               </b-table-column>
