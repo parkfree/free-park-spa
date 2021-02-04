@@ -6,7 +6,10 @@
           <b-icon icon="users" type="is-primary"></b-icon>
           <span class="ml-1">账号列表</span>
         </p>
-        <div class="card-header-icon">
+        <div class="card-header-icon buttons">
+          <b-button type="is-primary" size="is-small" icon-left="ticket-alt" @click="confirmBuyCoupons">
+            领取优惠券
+          </b-button>
           <b-button type="is-primary" size="is-small" icon-left="user-plus" @click="addMember">
             添加账号
           </b-button>
@@ -86,6 +89,23 @@ export default {
         })
         .catch((err) => {
           this.handleApiError(err, '获取账号列表失败')
+        })
+    },
+    confirmBuyCoupons () {
+      this.$buefy.dialog.confirm({
+        message: '确定重新领取所有账号的优惠券吗？领取之后由于技术原因，请稍等几分钟刷新页面查看领取结果。请不要重复刷新！',
+        confirmText: '确认',
+        cancelText: '取消',
+        onConfirm: () => this.buyCoupons()
+      })
+    },
+    buyCoupons () {
+      this.$http.post(`/coupons`)
+        .then(() => {
+          this.getMembers()
+        })
+        .catch((err) => {
+          this.handleApiError(err, '获取优惠券失败')
         })
     },
     confirmDelete (id) {
