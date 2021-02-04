@@ -93,7 +93,7 @@ export default {
     },
     confirmBuyCoupons () {
       this.$buefy.dialog.confirm({
-        message: '确定重新领取所有账号的优惠券吗？领取之后由于技术原因，请稍等几分钟刷新页面查看领取结果。请不要重复刷新！',
+        message: '确定重新领取所有账号的优惠券吗？领取之后由于技术原因，请稍等几分钟刷新页面查看领取结果。请不要重复点击领券按钮！',
         confirmText: '确认',
         cancelText: '取消',
         onConfirm: () => this.buyCoupons()
